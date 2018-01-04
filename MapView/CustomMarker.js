@@ -49,27 +49,27 @@ export default class CustomMarker extends Component {
             textForCluster = point_count.toString();
             markerWidth = width*2/15;
             markerHeight = width*2/15;
-            textSize = GLOBAL.clusterTextSize;
+            textSize = height/40;
         }if(point_count>10&&point_count<=25){
             textForCluster = '10+';
             markerWidth = width/7;
             markerHeight = width/7;
-            textSize = GLOBAL.clusterTextSize;
+            textSize = height/40;
         }if(point_count>25&&point_count<=50){
             textForCluster = '25+';
             markerWidth = width*2/13;
             markerHeight = width*2/13;
-            textSize = GLOBAL.clusterTextSize;
+            textSize = height/40;
         }if(point_count>50&&point_count<=100){
             textForCluster = '50+';
             markerWidth = width/6;
             markerHeight = width/6;
-            textSize = GLOBAL.clusterTextSize;
+            textSize = height/38;
         }if(point_count>100){
             textForCluster = '100+';
             markerWidth = width*2/11;
             markerHeight = width*2/11;
-            textSize = GLOBAL.clusterTextSize;
+            textSize = height/38;
         }
 
         if(GLOBAL.clusterTextSize){
@@ -95,23 +95,27 @@ export default class CustomMarker extends Component {
                 htmlElement = <View
                     style={{width: markerWidth, height: markerHeight, justifyContent: 'center', alignItems: 'center'}}>
                     {this.props.customClusterMarkerDesign(markers || [])}
-                    <Text style={{
+                    <Text style={[{
                         width: markerWidth, textAlign: 'center', position: 'absolute',
-                        fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'
-                    }}
+                        fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold',
+                    }, this.props.clusterTextStyle]}
                           children={textForCluster}/>
                 </View>;
             } else if(this.props.customClusterMarkerDesign && typeof this.props.customClusterMarkerDesign === "object"){
                 htmlElement = <View style = {{width: markerWidth, height: markerHeight, justifyContent: 'center', alignItems: 'center'}}>
                     {this.props.customClusterMarkerDesign}
-                    <Text style = {{width: markerWidth, textAlign: 'center', position:'absolute',
-                        fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'}}
+                    <Text style = {[{width: markerWidth, textAlign: 'center', position:'absolute',
+                        fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'},
+                        this.props.clusterTextStyle
+                    ]}
                           children = {textForCluster}/>
                 </View>;
             }else{
                 htmlElement = (
-                    <View style = {{ borderRadius: markerWidth, position: 'relative', backgroundColor: GLOBAL.clusterColor, width: markerWidth, height: markerHeight,
-                        borderWidth: GLOBAL.clusterBorderWidth, borderColor: GLOBAL.clusterBorderColor, justifyContent: 'center', alignItems: 'center'}}>
+                    <View style = {[{ borderRadius: markerWidth, position: 'relative', backgroundColor: GLOBAL.clusterColor, width: markerWidth, height: markerHeight,
+                        borderWidth: GLOBAL.clusterBorderWidth, borderColor: GLOBAL.clusterBorderColor, justifyContent: 'center', alignItems: 'center'},
+                        this.props.clusterTextStyle
+                    ]}>
                         <Text
                             style = {{width: markerWidth, textAlign: 'center',
                                 fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'}}>
